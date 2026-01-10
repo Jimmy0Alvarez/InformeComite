@@ -73,7 +73,7 @@ body {
    TÍTULOS
 ====================================================== */
 h2 {
-    margin: 25px 0 15px;
+    margin: 25px 0 15px !important;
     text-align: center;
     font-size: 15px;
     font-weight: bold;
