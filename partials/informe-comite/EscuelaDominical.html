@@ -1,0 +1,154 @@
+<!-- INFORME: Escuela Dominical -->
+<section class="informe-comite">
+    
+    <h2 data-comite="EscuelaDominical">ESCUELA DOMINICAL</h2>
+
+    <h2 class="informe-registrado">Informe registrado</br>{{MES_ANO}}</h2>
+
+    <!-- CANTIDADES -->
+    <div class="table-wrapper">
+      <table class="data-grid">
+        <colgroup>
+          <col class="col-campo">
+          <col class="col-valor">
+        </colgroup>
+        <thead>
+          <tr><th>Cantidades</th><th class="value-header">Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Integrantes</td><td><span id="integrantes"></span></td></tr>
+          <tr><td>Número de clases</td><td><span id="numero_clases"></span></td></tr>
+          <tr><td>Número de maestros</td><td><span id="numero_maestros"></span></td></tr>
+          <tr><td>Ayudantes</td><td><span id="ayudantes"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PENSUM -->
+    <div class="table-wrapper">
+      <table class="data-grid">
+        <colgroup>
+          <col class="col-campo">
+          <col class="col-valor">
+        </colgroup>
+        <thead>
+          <tr><th>Pensum</th><th class="value-header">Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>¿Aplica pensum?</td><td><span id="aplica_pensum"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ASISTENCIA POR EDADES -->
+    <div class="table-wrapper">
+      <table class="data-grid">
+        <colgroup>
+          <col class="col-campo">
+          <col class="col-valor">
+        </colgroup>
+        <thead>
+          <tr><th>Asistencia por edades</th><th class="value-header">Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Niños/as (3–11 años)</td><td><span id="ninos_3_11"></span></td></tr>
+          <tr><td>Adolescentes (12–17 años)</td><td><span id="adolescentes_12_17"></span></td></tr>
+          <tr><td>Total</td><td><span id="total"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PROMEDIOS -->
+    <div class="table-wrapper">
+      <table class="data-grid">
+        <colgroup>
+          <col class="col-campo">
+          <col class="col-valor">
+        </colgroup>
+        <thead>
+          <tr><th>Promedios</th><th class="value-header">Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Promedio Escuela Bíblica Vacacional</td><td><span id="promedio_ebv"></span></td></tr>
+          <tr><td>Promedio Asistencia General (Semillitas)</td><td><span id="promedio_asistencia_general_semillitas"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ESCUELA BÍBLICA DE BARRIOS -->
+    <div class="table-wrapper">
+      <table class="data-grid">
+        <colgroup>
+          <col class="col-campo">
+          <col class="col-valor">
+        </colgroup>
+        <thead>
+          <tr><th>Escuela Bíblica de Barrios</th><th class="value-header">Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Número de maestros</td><td><span id="eb_barrios_numero_maestros"></span></td></tr>
+          <tr><td>Niños/as (3–11 años)</td><td><span id="eb_barrios_ninos_3_11"></span></td></tr>
+          <tr><td>Adolescentes (12–17 años)</td><td><span id="eb_barrios_adolescentes_12_17"></span></td></tr>
+          <tr><td>Total</td><td><span id="eb_barrios_total"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ACTIVIDADES ESPIRITUALES -->
+    <div class="table-wrapper">
+      <table class="data-grid">
+        <colgroup>
+          <col class="col-campo">
+          <col class="col-valor">
+        </colgroup>
+        <thead>
+          <tr><th>Actividades Espirituales</th><th class="value-header">Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cadenas de oración</td><td><span id="cadenas_de_oracion"></span></td></tr>
+          <tr><td>Ayunos</td><td><span id="ayunos"></span></td></tr>
+          <tr><td>Cultos</td><td><span id="cultos"></span></td></tr>
+          <tr><td>Vigilias</td><td><span id="vigilias"></span></td></tr>
+          <tr><td>Tren semillero</td><td><span id="tren_semillero"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ACTIVIDADES SOCIALES -->
+    <div class="table-wrapper">
+      <table class="data-grid">
+        <colgroup>
+          <col class="col-campo">
+          <col class="col-valor">
+        </colgroup>
+        <thead>
+          <tr><th>Actividades Sociales</th><th class="value-header">Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cumpleaños</td><td><span id="cumpleanos"></span></td></tr>
+          <tr><td>Tardes recreacionales</td><td><span id="tardes_recreacionales"></span></td></tr>
+          <tr><td>Visitas</td><td><span id="visitas"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ACTIVIDADES ECONÓMICAS -->
+    <div class="table-wrapper">
+      <table class="data-grid">
+        <colgroup>
+          <col class="col-campo">
+          <col class="col-valor">
+        </colgroup>
+        <thead>
+          <tr><th>Actividades Económicas</th><th class="value-header">Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Ventas</td><td><span id="ventas"></span></td></tr>
+          <tr><td>Votos</td><td><span id="votos"></span></td></tr>
+          <tr><td>Talentos</td><td><span id="talentos"></span></td></tr>
+          <tr><td>Donaciones de terceros</td><td><span id="donaciones_terceros"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+ </section>

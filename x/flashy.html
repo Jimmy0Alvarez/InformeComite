@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Flashy.js – Test Completo</title>
+  <script src="./js/flashy.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f3f4f6;
+      padding: 32px;
+      color: #111827;
+    }
+
+    h1 {
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin-top: 0;
+      color: #4b5563;
+      font-size: 14px;
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    button {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: #2563eb;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Flashy.js</h1>
+<p>Prueba completa de todas las funcionalidades básicas de la librería</p>
+
+<!-- TIPOS -->
+<section>
+  <h2>Tipos de notificación</h2>
+  <div class="grid">
+    <button onclick="flashy.success('Mensaje de éxito')">Success</button>
+    <button onclick="flashy.error('Mensaje de error')">Error</button>
+    <button onclick="flashy.warning('Mensaje de advertencia')">Warning</button>
+    <button onclick="flashy.info('Mensaje informativo')">Info</button>
+    <button onclick="flashy('Mensaje por defecto')">Default</button>
+  </div>
+</section>
+
+<!-- POSICIONES -->
+<section>
+  <h2>Posiciones</h2>
+  <div class="grid">
+    <button onclick="flashy('Top Left', { position: 'top-left' })">Top Left</button>
+    <button onclick="flashy('Top Center', { position: 'top-center' })">Top Center</button>
+    <button onclick="flashy('Top Right', { position: 'top-right' })">Top Right</button>
+    <button onclick="flashy('Bottom Left', { position: 'bottom-left' })">Bottom Left</button>
+    <button onclick="flashy('Bottom Center', { position: 'bottom-center' })">Bottom Center</button>
+    <button onclick="flashy('Bottom Right', { position: 'bottom-right' })">Bottom Right</button>
+  </div>
+</section>
+
+<!-- ANIMACIONES -->
+<section>
+  <h2>Animaciones</h2>
+  <div class="grid">
+    <button onclick="flashy('Slide animation', { animation: 'slide' })">Slide</button>
+    <button onclick="flashy('Fade animation', { animation: 'fade' })">Fade</button>
+    <button onclick="flashy('Bounce animation', { animation: 'bounce' })">Bounce</button>
+    <button onclick="flashy('Zoom animation', { animation: 'zoom' })">Zoom</button>
+  </div>
+</section>
+
+<!-- TEMAS -->
+<section>
+  <h2>Temas</h2>
+  <div class="grid">
+    <button onclick="flashy('Tema claro', { theme: 'light' })">Light</button>
+    <button onclick="flashy('Tema oscuro', { theme: 'dark' })">Dark</button>
+  </div>
+</section>
+
+<!-- DURACIÓN -->
+<section>
+  <h2>Duración</h2>
+  <div class="grid">
+    <button onclick="flashy('Dura 2 segundos', { duration: 2000 })">2 segundos</button>
+    <button onclick="flashy('Dura 6 segundos', { duration: 6000 })">6 segundos</button>
+    <button onclick="flashy('No se cierra solo', { duration: 0 })">Sin auto-cierre</button>
+  </div>
+</section>
+
+<!-- ICONOS -->
+<section>
+  <h2>Iconos personalizados</h2>
+  <div class="grid">
+    <button onclick="flashy('Icono estrella', { icon: '⭐' })">⭐ Estrella</button>
+    <button onclick="flashy('Icono fuego', { icon: '🔥' })">🔥 Fuego</button>
+    <button onclick="flashy('Icono cohete', { icon: '🚀' })">🚀 Cohete</button>
+  </div>
+</section>
+
+<!-- CALLBACKS -->
+<section>
+  <h2>Callbacks</h2>
+  <div class="grid">
+    <button onclick="flashy('Click en la notificación', {
+      onClick: () => alert('onClick ejecutado')
+    })">onClick</button>
+
+    <button onclick="flashy('Cierra para ejecutar callback', {
+      onClose: () => alert('onClose ejecutado')
+    })">onClose</button>
+  </div>
+</section>
+
+<!-- UTILIDADES -->
+<section>
+  <h2>Funciones globales</h2>
+  <div class="grid">
+    <button onclick="flashy.closeAll()">Cerrar todas</button>
+    <button onclick="console.log(flashy.getOptions())">Ver defaults (console)</button>
+    <button onclick="flashy.setDefaults({ position: 'bottom-right', theme: 'dark' })">
+      Cambiar defaults
+    </button>
+  </div>
+</section>
+
+</body>
+</html>
