@@ -524,7 +524,22 @@ async function iniciarApp() {
     }
 }
 
-window.addEventListener("load", iniciarApp);
+/* ======================================================
+   11.5. CONFIGURACIÓN DE EVENTOS DEL BANNER
+====================================================== */
+
+function configurarBanner() {
+    const banner = document.getElementById("bannerPrincipal");
+    if (banner) {
+        banner.style.cursor = "pointer";
+        banner.onclick = () => navegar(RUTAS.inicio);
+    }
+}
+
+window.addEventListener("load", () => {
+    iniciarApp();
+    configurarBanner();
+});
 window.onpopstate = iniciarApp;
 
 /* ======================================================
