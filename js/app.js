@@ -3,7 +3,7 @@
 ====================================================== */
 
 const ID = 1;
-const API_URL = "https://sheetdb.io/api/v1/mdaz3wrflxsmq";
+const API_URL = "https://sheetdb.io/api/v1/d5uiqw37ubsrq";
 
 /* Lista blanca de comités válidos */
 const COMITES_VALIDOS = [
