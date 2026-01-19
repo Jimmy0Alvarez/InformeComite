@@ -3,7 +3,7 @@
 ====================================================== */
 
 const ID = 1;
-const API_URL = "https://sheetdb.io/api/v1/cuk1emanlvfsc";
+const API_URL = "https://sheetdb.io/api/v1/mdaz3wrflxsmq";
 
 /* Lista blanca de comités válidos */
 const COMITES_VALIDOS = [
@@ -326,7 +326,13 @@ function activarMenu() {
 function activarEnvio() {
     const btn = document.getElementById("btnEnviar");
     if (!btn) return;
-    btn.onclick = () => validarCampos() && enviarDatos();
+    btn.onclick = () => {
+        if (validarCampos()) {
+            // Notificación antes de enviar a la base de datos
+            flashy.info("Enviando informe...", { duration: 3000 });
+            enviarDatos();
+        }
+    };
 }
 
 /* ======================================================
@@ -374,13 +380,43 @@ https://informe-secretario.netlify.app/#informe/${AppState.comite}
 ====================================================== */
 
 function validarCampos() {
-    for (const input of contenedor.querySelectorAll("input")) {
+    const inputs = contenedor.querySelectorAll("input");
+
+    // Validar inputs normales (no radio)
+    for (const input of inputs) {
         if (input.type !== "radio" && !input.value.trim()) {
             flashy.info(`Completa el campo "${input.name}"`);
             input.focus();
             return false;
         }
     }
+
+    // Validar que haya al menos un radio seleccionado por grupo (por name)
+    const gruposRadio = {};
+
+    for (const input of inputs) {
+        if (input.type === "radio") {
+            const nombre = input.name || "opción";
+            if (!gruposRadio[nombre]) {
+                gruposRadio[nombre] = {
+                    tieneSeleccionado: false,
+                    primero: input
+                };
+            }
+            if (input.checked) {
+                gruposRadio[nombre].tieneSeleccionado = true;
+            }
+        }
+    }
+
+    for (const [nombre, grupo] of Object.entries(gruposRadio)) {
+        if (!grupo.tieneSeleccionado) {
+            flashy.info(`Selecciona una opción en "${nombre}"`);
+            grupo.primero.focus();
+            return false;
+        }
+    }
+
     return true;
 }
 
@@ -391,47 +427,56 @@ function validarCampos() {
 async function enviarDatos() {
     const COMITE = AppState.comite;
 
-    // 1️⃣ Traer fila completa
-    const res = await fetch(`${API_URL}/search?ID=${ID}&single_object=true`);
-    const fila = await res.json();
+    try {
+        // 1️⃣ Traer fila completa
+        const res = await fetch(`${API_URL}/search?ID=${ID}&single_object=true`);
+        const fila = await res.json();
 
-    // 2️⃣ Obtener datos actuales del comité
-    let objetoComite = fila[COMITE]
-        ? JSON.parse(fila[COMITE])
-        : {};
+        // 2️⃣ Obtener datos actuales del comité
+        let objetoComite = fila[COMITE]
+            ? JSON.parse(fila[COMITE])
+            : {};
 
-    // 3️⃣ Obtener mes_ano_enviado completo
-    let mesAnoEnviado = fila.mes_ano_enviado
-        ? JSON.parse(fila.mes_ano_enviado)
-        : {};
+        // 3️⃣ Obtener mes_ano_enviado completo
+        let mesAnoEnviado = fila.mes_ano_enviado
+            ? JSON.parse(fila.mes_ano_enviado)
+            : {};
 
-    // 4️⃣ Guardar datos del formulario
-    contenedor.querySelectorAll("input").forEach(i => {
-        if (i.type !== "radio" || i.checked) {
-            objetoComite[i.name] = i.value;
-        }
-    });
+        // 4️⃣ Guardar datos del formulario
+        contenedor.querySelectorAll("input").forEach(i => {
+            if (i.type !== "radio" || i.checked) {
+                objetoComite[i.name] = i.value;
+            }
+        });
 
-    // 5️⃣ Guardar mes y año en el comité
-    objetoComite.mes_ano = AppState.mesAno;
+        // 5️⃣ Guardar mes y año en el comité
+        objetoComite.mes_ano = AppState.mesAno;
 
-    // 6️⃣ Guardar mes y año SOLO en el comité correspondiente
-    mesAnoEnviado[COMITE] = AppState.mesAno;
+        // 6️⃣ Guardar mes y año SOLO en el comité correspondiente
+        mesAnoEnviado[COMITE] = AppState.mesAno;
 
-    // 7️⃣ PATCH ÚNICO
-    await fetch(`${API_URL}/ID/${ID}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            [COMITE]: JSON.stringify(objetoComite),
-            mes_ano_enviado: JSON.stringify(mesAnoEnviado)
-        })
-    });
+        // 7️⃣ PATCH ÚNICO
+        await fetch(`${API_URL}/ID/${ID}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                [COMITE]: JSON.stringify(objetoComite),
+                mes_ano_enviado: JSON.stringify(mesAnoEnviado)
+            })
+        });
 
-    // 8️⃣ Limpiar historial del formulario
-    history.replaceState(null, "", `#informe/${COMITE}`);
+        // 8️⃣ Limpiar historial del formulario
+        history.replaceState(null, "", `#informe/${COMITE}`);
 
-    renderVista(RUTAS.informe, { comite: COMITE });
+        renderVista(RUTAS.informe, { comite: COMITE });
+
+        // 9️⃣ Notificación de éxito
+        flashy.success("Informe enviado con éxito");
+    } catch (e) {
+        // 🔟 Notificación de error
+        console.error(e);
+        flashy.error("Ocurrió un error al enviar el informe. Intenta nuevamente.");
+    }
 }
 
 /* ======================================================
